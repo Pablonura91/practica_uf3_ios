@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3EDD30B922853E86003D019B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDD30B822853E86003D019B /* AudioToolbox.framework */; };
+		3EDD30BB22853ED3003D019B /* SingletonMusicOnBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDD30BA22853ED3003D019B /* SingletonMusicOnBackground.swift */; };
 		9140FB5F2278B37E007468B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9140FB5E2278B37E007468B4 /* AppDelegate.swift */; };
 		9140FB612278B37E007468B4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9140FB602278B37E007468B4 /* ViewController.swift */; };
 		9140FB642278B37E007468B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9140FB622278B37E007468B4 /* Main.storyboard */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3EDD30B822853E86003D019B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		3EDD30BA22853ED3003D019B /* SingletonMusicOnBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingletonMusicOnBackground.swift; sourceTree = "<group>"; };
 		9140FB5B2278B37E007468B4 /* FrameByFrame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrameByFrame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9140FB5E2278B37E007468B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9140FB602278B37E007468B4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,17 +39,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EDD30B922853E86003D019B /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3EDD30B722853E86003D019B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3EDD30B822853E86003D019B /* AudioToolbox.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9140FB522278B37E007468B4 = {
 			isa = PBXGroup;
 			children = (
 				9140FB5D2278B37E007468B4 /* FrameByFrame */,
 				9140FB5C2278B37E007468B4 /* Products */,
+				3EDD30B722853E86003D019B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,6 +83,7 @@
 				9140FB702278B392007468B4 /* Viper.swift */,
 				91FF5322227AD115004B8DD8 /* Actor.swift */,
 				91FF5324227AD436004B8DD8 /* Asteroid.swift */,
+				3EDD30BA22853ED3003D019B /* SingletonMusicOnBackground.swift */,
 			);
 			path = FrameByFrame;
 			sourceTree = "<group>";
@@ -146,6 +161,7 @@
 			files = (
 				9140FB612278B37E007468B4 /* ViewController.swift in Sources */,
 				9140FB5F2278B37E007468B4 /* AppDelegate.swift in Sources */,
+				3EDD30BB22853ED3003D019B /* SingletonMusicOnBackground.swift in Sources */,
 				9140FB712278B392007468B4 /* Viper.swift in Sources */,
 				91FF5323227AD115004B8DD8 /* Actor.swift in Sources */,
 				91FF5325227AD436004B8DD8 /* Asteroid.swift in Sources */,
