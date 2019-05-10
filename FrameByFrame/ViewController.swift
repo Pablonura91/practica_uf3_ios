@@ -79,14 +79,15 @@ class ViewController: UIViewController {
             //check viper screen collision
             /*INSERT CODE HERE*/
             if viper.checkScreenCollision(screenViewSize: self.view.frame.size){
-                self.gameRunning = false
+                self.viperImageView.removeFromSuperview()
+//                self.gameRunning = false
 //                self.gameOver()
                 
             }
             
             //check asteroids collision between viper and screen
             /*INSERT CODE HERE*/
-            checkColisionBetweenviperAndScreen()
+//            checkColisionBetweenviperAndScreen()
             
             //remove from scene asteroids
             /*INSERT CODE HERE*/
@@ -120,8 +121,8 @@ class ViewController: UIViewController {
     }
     
     private func checkColisionBetweenviperAndScreen(){
-        let withViper = self.viper.size.width
-        let heightViper = self.viper.size.height
+        let withViper = self.viper.size.width / 2
+        let heightViper = self.viper.size.height / 2
         var isDestroy = false
         
         if viper.center.x >= self.view.frame.maxX - withViper || viper.center.x <= self.view.frame.minX + withViper{
@@ -130,7 +131,7 @@ class ViewController: UIViewController {
             isDestroy = true
         }
         
-        if isDestroy { self.viperImageView.removeFromSuperview() }
+        if isDestroy {  }
     }
 }
 
