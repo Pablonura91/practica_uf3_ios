@@ -6,7 +6,7 @@ class ViewController: UIViewController {
     
     //Viper
     var viperImageView = UIImageView()
-    var viper = Viper(speed: 3.5, center: CGPoint(x: 200, y: 600), size: CGSize(width: 100, height: 100))
+    var viper = Viper(speed: 3.0, center: CGPoint(x: 200, y: 600), size: CGSize(width: 100, height: 100))
     
     //Asteroids
     let ASTEROIDS_IMAGES_NAMES = ["Asteroid_A", "Asteroid_B", "Asteroid_C"]
@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     //Game Logic
     var gameRunning = false //to control game state
     var stepNumber = 0 //Used in asteroids generation: every 5s an asteroid will be created
+    var dificulty: CGFloat = 2.0
+    var speedViper: CGFloat = 3.0
     
     
     
@@ -63,6 +65,10 @@ class ViewController: UIViewController {
             if (stepNumber%(60*5)==0){
                 createAsteroid()
             }
+            
+            if (stepNumber%(60*10)==0){
+                checkDificulty()
+            }
         
             //update location viper
             self.viper.step() //update the model
@@ -97,7 +103,7 @@ class ViewController: UIViewController {
         }
     }
     private func createAsteroid(){
-        let asteroid = Asteroid(speed: 3, center: CGPoint(x: randomPositionY(), y: 140), size: CGSize(width: 75, height: 75))
+        let asteroid = Asteroid(speed: self.dificulty, center: CGPoint(x: randomPositionY(), y: 140), size: CGSize(width: 75, height: 75))
         self.asteroids.append(asteroid)
         
         let index = Int.random(in: 0 ..< ASTEROIDS_IMAGES_NAMES.count)
@@ -132,6 +138,15 @@ class ViewController: UIViewController {
         }
         
         if isDestroy {  }
+    }
+    
+    private func checkDificulty(){
+        //Speed Asteroids
+        self.dificulty *= 1.05
+        
+        //Speed Viper
+        self.speedViper *= 1.01
+        self.viper.speed = self.speedViper
     }
 }
 
