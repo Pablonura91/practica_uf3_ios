@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5hH-jU-nak">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5hH-jU-nak">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,17 +21,30 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_field_iphone" translatesAutoresizingMaskIntoConstraints="NO" id="ilM-Xf-B94">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <progressView opaque="NO" contentMode="scaleAspectFit" verticalHuggingPriority="750" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="lhm-IB-yaL">
+                                <rect key="frame" x="112" y="633" width="151" height="0.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.5" id="oOD-QR-9bB"/>
+                                </constraints>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ilM-Xf-B94" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7XB-45-c3F"/>
+                            <constraint firstItem="lhm-IB-yaL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="96" id="8Lq-Eb-n6N"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lhm-IB-yaL" secondAttribute="bottom" constant="33.5" id="Djq-WI-J5S"/>
                             <constraint firstItem="ilM-Xf-B94" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="KQ8-WY-mxD"/>
+                            <constraint firstItem="lhm-IB-yaL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="569" id="cq4-9e-VIU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lhm-IB-yaL" secondAttribute="trailing" constant="96" id="eSv-9E-cuT"/>
                             <constraint firstItem="ilM-Xf-B94" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="leE-ko-Dd4"/>
                             <constraint firstAttribute="trailing" secondItem="ilM-Xf-B94" secondAttribute="trailing" id="qPB-Dq-9QD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="SIMPLE MOVEMENT" id="ter-EE-MAW"/>
+                    <connections>
+                        <outlet property="progressBar" destination="lhm-IB-yaL" id="p3W-rV-MB4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -1,6 +1,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var progressBar: UIProgressView!
+    private var tempProgress: Float = 0.0
     //Music  Background
     let singletonMusicBackground = SingletonMusicOnBackground.sharedInstance
     
@@ -70,6 +73,10 @@ class ViewController: UIViewController {
             if (stepNumber%(60*10)==0){
                 checkDificulty()
             }
+            
+            if (asteroidsToBeRemoved.count > 0 && asteroidsToBeRemoved.count % 10 == 0){
+                updateProgressBar()
+            }
         
             //update location viper
             self.viper.step() //update the model
@@ -94,7 +101,6 @@ class ViewController: UIViewController {
             
             //check asteroids collision between viper and screen
             /*INSERT CODE HERE*/
-//            checkColisionBetweenviperAndScreen()
             
             //remove from scene asteroids
             /*INSERT CODE HERE*/
@@ -122,23 +128,15 @@ class ViewController: UIViewController {
     private func checkAsteroidsSceneToRemove(){
         for index in 0..<asteroids.count{
             if asteroids[index].center.y >= self.view.frame.maxY{
+                
                 self.asteroidsViews[index].removeFromSuperview()
+                self.asteroidsToBeRemoved.append(asteroids[index])
+                self.asteroids.remove(at: index)
+                self.asteroidsViews.remove(at: index)
+                
+                break
             }
         }
-    }
-    
-    private func checkColisionBetweenviperAndScreen(){
-        let withViper = self.viper.size.width / 2
-        let heightViper = self.viper.size.height / 2
-        var isDestroy = false
-        
-        if viper.center.x >= self.view.frame.maxX - withViper || viper.center.x <= self.view.frame.minX + withViper{
-            isDestroy = true
-        } else if viper.center.y >= self.view.frame.maxY - heightViper || viper.center.y <= self.view.frame.minY + heightViper {
-            isDestroy = true
-        }
-        
-        if isDestroy {  }
     }
     
     private func checkDificulty(){
@@ -148,6 +146,14 @@ class ViewController: UIViewController {
         //Speed Viper
         self.speedViper *= 1.01
         self.viper.speed = self.speedViper
+    }
+    
+    private func updateProgressBar(){
+        self.tempProgress = progressBar.progress
+        print(tempProgress)
+        progressBar.progress = self.tempProgress + 0.05
+        
+        asteroidsToBeRemoved.removeAll()
     }
 }
 
