@@ -63,7 +63,6 @@ class ViewController: UIViewController {
             if (stepNumber%(60*5)==0){
                 createAsteroid()
             }
-            stepNumber+=1
         
             //update location viper
             self.viper.step() //update the model
@@ -87,6 +86,7 @@ class ViewController: UIViewController {
             
             //check asteroids collision between viper and screen
             /*INSERT CODE HERE*/
+            checkColisionBetweenviperAndScreen()
             
             //remove from scene asteroids
             /*INSERT CODE HERE*/
@@ -117,6 +117,20 @@ class ViewController: UIViewController {
                 self.asteroidsViews[index].removeFromSuperview()
             }
         }
+    }
+    
+    private func checkColisionBetweenviperAndScreen(){
+        let withViper = self.viper.size.width
+        let heightViper = self.viper.size.height
+        var isDestroy = false
+        
+        if viper.center.x >= self.view.frame.maxX - withViper || viper.center.x <= self.view.frame.minX + withViper{
+            isDestroy = true
+        } else if viper.center.y >= self.view.frame.maxY - heightViper || viper.center.y <= self.view.frame.minY + heightViper {
+            isDestroy = true
+        }
+        
+        if isDestroy { self.viperImageView.removeFromSuperview() }
     }
 }
 
