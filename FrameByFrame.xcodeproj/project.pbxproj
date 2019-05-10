@@ -54,9 +54,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3EDD30BC22853F9E003D019B /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
 		9140FB522278B37E007468B4 = {
 			isa = PBXGroup;
 			children = (
+				3EDD30BC22853F9E003D019B /* Audio */,
 				9140FB5D2278B37E007468B4 /* FrameByFrame */,
 				9140FB5C2278B37E007468B4 /* Products */,
 				3EDD30B722853E86003D019B /* Frameworks */,

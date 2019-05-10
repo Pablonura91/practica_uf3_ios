@@ -1,7 +1,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    //Music  Background
+    let singletonMusicBackground = SingletonMusicOnBackground.sharedInstance
+    
     //Viper
     var viperImageView = UIImageView()
     var viper = Viper(speed: 3.5, center: CGPoint(x: 200, y: 600), size: CGSize(width: 100, height: 100))
@@ -21,6 +23,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Set Music Background
+        singletonMusicBackground.create()
+        
         // Do any additional setup after loading the view, typically from a nib.
         
         //set up Viper
