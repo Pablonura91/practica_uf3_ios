@@ -29,6 +29,7 @@ class ViewController: UIViewController {
         singletonMusicBackground.create()
         
         // Do any additional setup after loading the view, typically from a nib.
+        viper.moveToPoint = CGPoint(x: self.view.center.x, y: self.view.center.y + (self.view.frame.height/2 - viper.size.height))
         
         //set up Viper
         viperImageView.frame.size = viper.size
