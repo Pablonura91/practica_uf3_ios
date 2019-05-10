@@ -90,6 +90,7 @@ class ViewController: UIViewController {
             
             //remove from scene asteroids
             /*INSERT CODE HERE*/
+            checkAsteroidsSceneToRemove()
             
             stepNumber+=1
         }
@@ -108,6 +109,14 @@ class ViewController: UIViewController {
 
     private func randomPositionY() -> Int{
         return Int.random(in: 0 ... Int(self.view.frame.width))
+    }
+    
+    private func checkAsteroidsSceneToRemove(){
+        for index in 0..<asteroids.count{
+            if asteroids[index].center.y >= self.view.frame.maxY{
+                self.asteroidsViews[index].removeFromSuperview()
+            }
+        }
     }
 }
 
