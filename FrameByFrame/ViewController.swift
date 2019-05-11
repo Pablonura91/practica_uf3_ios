@@ -31,6 +31,10 @@ class ViewController: UIViewController {
         //Set Music Background
         singletonMusicBackground.create()
         
+        //Progressbar
+        progressBar.frame.size = CGSize(width: 300, height: 10)
+        progressBar.center = CGPoint(x: self.view.center.x, y: self.view.center.y + (self.view.frame.height/2 - 50))
+        
         // Do any additional setup after loading the view, typically from a nib.
         viper.moveToPoint = CGPoint(x: self.view.center.x, y: self.view.center.y + (self.view.frame.height/2 - viper.size.height))
         
@@ -75,7 +79,7 @@ class ViewController: UIViewController {
             }
             
             if (asteroidsToBeRemoved.count > 0 && asteroidsToBeRemoved.count % 10 == 0){
-                updateProgressBar()
+                increaseProgressBar()
             }
         
             //update location viper
@@ -93,7 +97,8 @@ class ViewController: UIViewController {
             //check viper screen collision
             /*INSERT CODE HERE*/
             if viper.checkScreenCollision(screenViewSize: self.view.frame.size){
-                self.viperImageView.removeFromSuperview()
+                self.decreaseProgressBar()
+//                self.viperImageView.removeFromSuperview()
 //                self.gameRunning = false
 //                self.gameOver()
                 
@@ -148,12 +153,32 @@ class ViewController: UIViewController {
         self.viper.speed = self.speedViper
     }
     
-    private func updateProgressBar(){
+    private func increaseProgressBar(){
         self.tempProgress = progressBar.progress
-        print(tempProgress)
+        
         progressBar.progress = self.tempProgress + 0.05
         
         asteroidsToBeRemoved.removeAll()
     }
+    
+    private func decreaseProgressBar(){
+        self.tempProgress = progressBar.progress
+        
+        decreasProgressBarAnimation()
+        progressBar.progress = self.tempProgress - 0.001
+    }
+    
+    private func decreasProgressBarAnimation(){
+//        AudioServicesPlaySystemSound(soundShake)
+        let shakeAnimation = CABasicAnimation(keyPath: "position")
+        shakeAnimation.duration = 0.07
+//        shakeAnimation.repeatCount = 50
+        shakeAnimation.autoreverses = true
+        shakeAnimation.fromValue = NSValue(cgPoint: CGPoint(x: self.progressBar.center.x - 10, y: self.progressBar.center.y))
+        shakeAnimation.toValue = NSValue(cgPoint: CGPoint(x: self.progressBar.center.x + 10, y: self.progressBar.center.y))
+        progressBar.layer.add(shakeAnimation, forKey: "position")
+    }
 }
+
+
 
