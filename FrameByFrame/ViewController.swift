@@ -73,11 +73,12 @@ class ViewController: UIViewController {
             if (stepNumber%(60*5)==0){
                 createAsteroid()
             }
-            
+            // Check dificulty every 10 seconds
             if (stepNumber%(60*10)==0){
                 checkDificulty()
             }
             
+            //Increase progress bar every time asteroids hit the floor
             if (asteroidsToBeRemoved.count > 0 && asteroidsToBeRemoved.count % 10 == 0){
                 increaseProgressBar()
             }
@@ -97,7 +98,7 @@ class ViewController: UIViewController {
             //check viper screen collision
             /*INSERT CODE HERE*/
             if viper.checkScreenCollision(screenViewSize: self.view.frame.size){
-                self.decreaseProgressBar()
+                self.decreaseProgressBar(dmg: Damage.Wall.rawValue)
 //                self.viperImageView.removeFromSuperview()
 //                self.gameRunning = false
 //                self.gameOver()
@@ -106,6 +107,8 @@ class ViewController: UIViewController {
             
             //check asteroids collision between viper and screen
             /*INSERT CODE HERE*/
+            
+            checkCollitionBetweenViperAndAsteroid()
             
             //remove from scene asteroids
             /*INSERT CODE HERE*/
@@ -134,11 +137,26 @@ class ViewController: UIViewController {
         for index in 0..<asteroids.count{
             if asteroids[index].center.y >= self.view.frame.maxY{
                 
-                self.asteroidsViews[index].removeFromSuperview()
                 self.asteroidsToBeRemoved.append(asteroids[index])
-                self.asteroids.remove(at: index)
-                self.asteroidsViews.remove(at: index)
+                eraseAsteroids(index: index)
                 
+                break
+            }
+        }
+    }
+    
+    private func eraseAsteroids(index:Int) {
+        self.asteroidsViews[index].removeFromSuperview()
+        self.asteroids.remove(at: index)
+        self.asteroidsViews.remove(at: index)
+    }
+    
+    private func checkCollitionBetweenViperAndAsteroid() {
+        for index in 0..<asteroids.count{
+            if self.viper.overlapsWith(actor: asteroids[index]) {
+                eraseAsteroids(index: index)
+                decreaseProgressBar(dmg: Damage.Asteroid.rawValue)
+                print("viper crashed")
                 break
             }
         }
@@ -161,11 +179,15 @@ class ViewController: UIViewController {
         asteroidsToBeRemoved.removeAll()
     }
     
-    private func decreaseProgressBar(){
+    private func decreaseProgressBar(dmg:Float){
         self.tempProgress = progressBar.progress
-        
+        if tempProgress > 0 {
         decreasProgressBarAnimation()
-        progressBar.progress = self.tempProgress - 0.001
+            progressBar.progress = self.tempProgress - dmg
+        } else {
+            gameOver()
+        }
+    
     }
     
     private func decreasProgressBarAnimation(){
@@ -177,6 +199,10 @@ class ViewController: UIViewController {
         shakeAnimation.fromValue = NSValue(cgPoint: CGPoint(x: self.progressBar.center.x - 10, y: self.progressBar.center.y))
         shakeAnimation.toValue = NSValue(cgPoint: CGPoint(x: self.progressBar.center.x + 10, y: self.progressBar.center.y))
         progressBar.layer.add(shakeAnimation, forKey: "position")
+    }
+    
+    private func gameOver() {
+        
     }
 }
 
