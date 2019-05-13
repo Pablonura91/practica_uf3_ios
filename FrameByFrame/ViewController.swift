@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     var viperImageView = UIImageView()
     var viper = Viper(speed: 3.0, center: CGPoint(x: 200, y: 600), size: CGSize(width: 100, height: 100))
     
+    var viperInitialPosition: CGPoint?
+    
     //Asteroids
     let ASTEROIDS_IMAGES_NAMES = ["Asteroid_A", "Asteroid_B", "Asteroid_C"]
     var asteroids = [Asteroid]()
@@ -41,7 +43,8 @@ class ViewController: UIViewController {
         
         // Do any additional setup after loading the view, typically from a nib.
         viper.speed = speedViper
-        viper.moveToPoint = CGPoint(x: self.view.center.x, y: self.view.center.y + (self.view.frame.height/2 - viper.size.height))
+        viperInitialPosition = CGPoint(x: self.view.center.x, y: self.view.center.y + (self.view.frame.height/2 - viper.size.height))
+        viper.moveToPoint = viperInitialPosition
         
         //set up Viper
         viperImageView.frame.size = viper.size
@@ -207,13 +210,11 @@ class ViewController: UIViewController {
     
     private func decreaseProgressBar(dmg:Float){
         self.tempProgress = progressBar.progress
-        if tempProgress > 0 {
+        if tempProgress <= 0 {
             decreasProgressBarAnimation()
             progressBar.progress = self.tempProgress - dmg
         } else {
             gameOver()
-            progressBar.progress = 0
-            self.gameRunning = false
         }
     
     }
@@ -229,10 +230,30 @@ class ViewController: UIViewController {
         progressBar.layer.add(shakeAnimation, forKey: "position")
     }
     
+    private func resetValues() {
+        progressBar.progress = 0.10
+        asteroids.removeAll()
+        asteroidsViews.removeAll()
+        asteroidsToBeRemoved.removeAll()
+        speedViper = 3.0
+        speedAsteroid = 2.0
+        viper.moveToPoint = viperInitialPosition
+        self.gameRunning = true
+    }
+    
     private func gameOver() {
+        //Game over setea la progress bar a 0 y cambia el estado del juego a false
+        progressBar.progress = 0
+        for index in 0..<asteroids.count {
+            eraseAsteroids(index: index)
+        }
+        self.gameRunning = false
+        //se crea el alert dialog del game over
         let alert = UIAlertController(title: "Game Over", message: "Do you want to quit the game?.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Default action"), style: .default, handler: { _ in
-            NSLog("The \"OK\" alert occured.")
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Try Again", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"Try Again\" alert occured.")
+            //se resetean los valores si el usuario clica en try again
+            self.resetValues()
         }))
         alert.addAction(UIAlertAction(title: NSLocalizedString("Exit", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"Cancel\" alert occured.")
