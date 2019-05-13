@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let audioSession = AVAudioSession.sharedInstance()
         do {
-            try audioSession.setCategory(AVAudioSession.Category.playback,
+            try audioSession.setCategory(AVAudioSession.Category.soloAmbient,
                                          mode: .default,
                                          policy: .longForm,
                                          options: [])

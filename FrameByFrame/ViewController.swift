@@ -1,4 +1,5 @@
 import UIKit
+import AudioToolbox
 
 class ViewController: UIViewController {
     
@@ -6,6 +7,10 @@ class ViewController: UIViewController {
     private var tempProgress: Float = 0.0
     //Music  Background
     let singletonMusicBackground = SingletonMusicOnBackground.sharedInstance
+    
+    //Sounds
+    private var soundColisionBetweenAsteroidAndViper :SystemSoundID = 0
+    private var soundColisionBetweenWallAndViper :SystemSoundID = 0
     
     //Viper
     var viperImageView = UIImageView()
@@ -30,6 +35,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         //Set Music Background
         singletonMusicBackground.create()
+        
+        //Set Sounds
+        loadSounds()
         
         // Do any additional setup after loading the view, typically from a nib.
         viper.moveToPoint = CGPoint(x: self.view.center.x, y: self.view.center.y + (self.view.frame.height/2 - viper.size.height))
@@ -94,6 +102,7 @@ class ViewController: UIViewController {
             //check viper screen collision
             /*INSERT CODE HERE*/
             if viper.checkScreenCollision(screenViewSize: self.view.frame.size){
+                AudioServicesPlaySystemSound(soundColisionBetweenWallAndViper)
                 self.decreaseProgressBar(dmg: Damage.Wall.rawValue)
 //                self.viperImageView.removeFromSuperview()
 //                self.gameRunning = false
@@ -113,8 +122,20 @@ class ViewController: UIViewController {
             stepNumber+=1
         }
     }
+    
+    private func loadSounds() {
+        if let soundColisionURL = Bundle.main.url(forResource: "asteroidExplosion", withExtension: "wav") {
+            AudioServicesCreateSystemSoundID(soundColisionURL as CFURL, &soundColisionBetweenAsteroidAndViper)
+        }
+        
+        if let soundColisionWallURL = Bundle.main.url(forResource: "asteroidExplosion", withExtension: "wav") {
+            AudioServicesCreateSystemSoundID(soundColisionWallURL as CFURL, &soundColisionBetweenWallAndViper)
+        }
+    }
+    
     private func createAsteroid(){
-        let asteroid = Asteroid(speed: self.dificulty, center: CGPoint(x: randomPositionY(), y: 140), size: CGSize(width: 75, height: 75))
+        //TODO: Tamaño aleatorio
+        let asteroid = Asteroid(speed: self.dificulty, center: CGPoint(x: randomPositionX(), y: 140), size: CGSize(width: 75, height: 75))
         self.asteroids.append(asteroid)
         
         let index = Int.random(in: 0 ..< ASTEROIDS_IMAGES_NAMES.count)
@@ -125,7 +146,8 @@ class ViewController: UIViewController {
         self.asteroidsViews.append(asteroidView)
     }
 
-    private func randomPositionY() -> Int{
+    private func randomPositionX() -> Int{
+        //TODO tamaño asteroide
         return Int.random(in: 0 ... Int(self.view.frame.width))
     }
     
@@ -151,6 +173,8 @@ class ViewController: UIViewController {
         for index in 0..<asteroids.count{
             if self.viper.overlapsWith(actor: asteroids[index]) {
                 eraseAsteroids(index: index)
+                
+                AudioServicesPlaySystemSound(soundColisionBetweenAsteroidAndViper)
                 decreaseProgressBar(dmg: Damage.Asteroid.rawValue)
 //                print("viper crashed")
                 break
@@ -178,7 +202,7 @@ class ViewController: UIViewController {
     private func decreaseProgressBar(dmg:Float){
         self.tempProgress = progressBar.progress
         if tempProgress > 0 {
-        decreasProgressBarAnimation()
+            decreasProgressBarAnimation()
             progressBar.progress = self.tempProgress - dmg
         } else {
             gameOver()
