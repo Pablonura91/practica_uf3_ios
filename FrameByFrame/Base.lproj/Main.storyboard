@@ -21,17 +21,23 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_field_iphone" translatesAutoresizingMaskIntoConstraints="NO" id="ilM-Xf-B94">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <progressView opaque="NO" contentMode="scaleAspectFit" verticalHuggingPriority="750" fixedFrame="YES" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="lhm-IB-yaL">
-                                <rect key="frame" x="112" y="633" width="151" height="0.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <progressView opaque="NO" contentMode="scaleAspectFit" verticalHuggingPriority="750" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="lhm-IB-yaL">
+                                <rect key="frame" x="46" y="637" width="283" height="10"/>
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="M0E-gg-2Da"/>
+                                </constraints>
                             </progressView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ilM-Xf-B94" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7XB-45-c3F"/>
+                            <constraint firstItem="lhm-IB-yaL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="Cxy-r6-Fyd"/>
                             <constraint firstItem="ilM-Xf-B94" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="KQ8-WY-mxD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lhm-IB-yaL" secondAttribute="trailing" constant="30" id="Rb7-hK-a8K"/>
                             <constraint firstItem="ilM-Xf-B94" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="leE-ko-Dd4"/>
                             <constraint firstAttribute="trailing" secondItem="ilM-Xf-B94" secondAttribute="trailing" id="qPB-Dq-9QD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lhm-IB-yaL" secondAttribute="bottom" constant="20" id="yW1-AZ-w49"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

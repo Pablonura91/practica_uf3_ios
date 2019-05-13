@@ -31,10 +31,6 @@ class ViewController: UIViewController {
         //Set Music Background
         singletonMusicBackground.create()
         
-        //Progressbar
-        progressBar.frame.size = CGSize(width: 300, height: 10)
-        progressBar.center = CGPoint(x: self.view.center.x, y: self.view.center.y + (self.view.frame.height/2 - 50))
-        
         // Do any additional setup after loading the view, typically from a nib.
         viper.moveToPoint = CGPoint(x: self.view.center.x, y: self.view.center.y + (self.view.frame.height/2 - viper.size.height))
         
@@ -156,7 +152,7 @@ class ViewController: UIViewController {
             if self.viper.overlapsWith(actor: asteroids[index]) {
                 eraseAsteroids(index: index)
                 decreaseProgressBar(dmg: Damage.Asteroid.rawValue)
-                print("viper crashed")
+//                print("viper crashed")
                 break
             }
         }
