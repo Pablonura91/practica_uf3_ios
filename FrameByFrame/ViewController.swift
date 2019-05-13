@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     //Game Logic
     var gameRunning = false //to control game state
     var stepNumber = 0 //Used in asteroids generation: every 5s an asteroid will be created
-    var dificulty: CGFloat = 2.0
+    var speedAsteroid: CGFloat = 2.0
     var speedViper: CGFloat = 3.0
     
     
@@ -40,6 +40,7 @@ class ViewController: UIViewController {
         loadSounds()
         
         // Do any additional setup after loading the view, typically from a nib.
+        viper.speed = speedViper
         viper.moveToPoint = CGPoint(x: self.view.center.x, y: self.view.center.y + (self.view.frame.height/2 - viper.size.height))
         
         //set up Viper
@@ -72,13 +73,10 @@ class ViewController: UIViewController {
     @objc func updateScene(){
         
         if gameRunning{
-            //create an asterior every 5s
+            //create an asterior every 5s and Dificulty
             /*INSERT CODE HERE*/
             if (stepNumber%(60*5)==0){
                 createAsteroid()
-            }
-            // Check dificulty every 10 seconds
-            if (stepNumber%(60*10)==0){
                 checkDificulty()
             }
             
@@ -134,8 +132,8 @@ class ViewController: UIViewController {
     }
     
     private func createAsteroid(){
-        //TODO: Tamaño aleatorio
-        let asteroid = Asteroid(speed: self.dificulty, center: CGPoint(x: randomPositionX(), y: 140), size: CGSize(width: 75, height: 75))
+        let size = randomWidth(minRange: 20, maxRange: 120)
+        let asteroid = Asteroid(speed: self.speedAsteroid, center: CGPoint(x: randomPositionX(range: Int(self.view.frame.width - (size.width / 2))), y: 140), size: size)
         self.asteroids.append(asteroid)
         
         let index = Int.random(in: 0 ..< ASTEROIDS_IMAGES_NAMES.count)
@@ -146,9 +144,17 @@ class ViewController: UIViewController {
         self.asteroidsViews.append(asteroidView)
     }
 
-    private func randomPositionX() -> Int{
-        //TODO tamaño asteroide
-        return Int.random(in: 0 ... Int(self.view.frame.width))
+    private func randomPositionX(range: Int) -> Int{
+        return randomNumber(minRange: 0, maxRange: range)
+    }
+    
+    private func randomWidth(minRange: Int, maxRange: Int) -> CGSize {
+        let size = randomNumber(minRange: minRange, maxRange: maxRange)
+        return CGSize(width: size, height: size)
+    }
+    
+    private func randomNumber(minRange: Int, maxRange: Int) -> Int{
+        return Int.random(in: minRange ... maxRange)
     }
     
     private func checkAsteroidsSceneToRemove(){
@@ -184,7 +190,7 @@ class ViewController: UIViewController {
     
     private func checkDificulty(){
         //Speed Asteroids
-        self.dificulty *= 1.05
+        self.speedAsteroid *= 1.05
         
         //Speed Viper
         self.speedViper *= 1.01
@@ -206,6 +212,8 @@ class ViewController: UIViewController {
             progressBar.progress = self.tempProgress - dmg
         } else {
             gameOver()
+            progressBar.progress = 0
+            self.gameRunning = false
         }
     
     }
@@ -222,7 +230,14 @@ class ViewController: UIViewController {
     }
     
     private func gameOver() {
-        
+        let alert = UIAlertController(title: "Game Over", message: "Do you want to quit the game?.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Exit", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"Cancel\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
