@@ -275,6 +275,8 @@ class ViewController: UIViewController {
         }))
         alert.addAction(UIAlertAction(title: NSLocalizedString("Exit", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"Cancel\" alert occured.")
+            //exit nos envía a otro controller
+            self.performSegue (withIdentifier: "goToScoreView", sender: nil)
         }))
         self.present(alert, animated: true, completion: nil)
     }
