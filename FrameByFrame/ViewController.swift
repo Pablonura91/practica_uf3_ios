@@ -9,6 +9,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var progressBar: UIProgressView!
     private var tempProgress: Float = 0.0
+    private var hasViperCollisionedWithAsteroid = false
     //Music  Background
     let singletonMusicBackground = SingletonMusicOnBackground.sharedInstance
     
@@ -182,8 +183,8 @@ class ViewController: UIViewController {
     private func checkCollitionBetweenViperAndAsteroid() {
         for index in 0..<asteroids.count{
             if self.viper.overlapsWith(actor: asteroids[index]) {
+                hasViperCollisionedWithAsteroid = true
                 eraseAsteroids(index: index)
-                
                 AudioServicesPlaySystemSound(soundColisionBetweenAsteroidAndViper)
                 decreaseProgressBar(dmg: Damage.Asteroid.rawValue)
 //                print("viper crashed")
@@ -193,8 +194,10 @@ class ViewController: UIViewController {
     }
     
     private func eraseAsteroids(index:Int) {
-        counter.increment()
-        scoreLabel.text = "\(counter.value)"
+        if (!hasViperCollisionedWithAsteroid) {
+            counter.increment()
+            scoreLabel.text = "\(counter.value)"
+        }
         self.asteroidsViews[index].removeFromSuperview()
         self.asteroids.remove(at: index)
         self.asteroidsViews.remove(at: index)
