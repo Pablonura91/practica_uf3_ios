@@ -84,13 +84,16 @@ class ViewController: UIViewController {
             }
             
             //Increase progress bar every time asteroids hit the floor
-            if (asteroidsToBeRemoved.count > 0 && asteroidsToBeRemoved.count % 10 == 0){
+            if (asteroidsToBeRemoved.count > 0 && asteroidsToBeRemoved.count % 5 == 0){
                 increaseProgressBar()
             }
         
             //update location viper
             self.viper.step() //update the model
             self.viperImageView.center = self.viper.center //update the view from the model
+            
+            //Update img viper
+            evolveViper()
             
             //update location asteroids
             /*INSERT CODE HERE*/
@@ -172,12 +175,6 @@ class ViewController: UIViewController {
         }
     }
     
-    private func eraseAsteroids(index:Int) {
-        self.asteroidsViews[index].removeFromSuperview()
-        self.asteroids.remove(at: index)
-        self.asteroidsViews.remove(at: index)
-    }
-    
     private func checkCollitionBetweenViperAndAsteroid() {
         for index in 0..<asteroids.count{
             if self.viper.overlapsWith(actor: asteroids[index]) {
@@ -189,6 +186,12 @@ class ViewController: UIViewController {
                 break
             }
         }
+    }
+    
+    private func eraseAsteroids(index:Int) {
+        self.asteroidsViews[index].removeFromSuperview()
+        self.asteroids.remove(at: index)
+        self.asteroidsViews.remove(at: index)
     }
     
     private func checkDificulty(){
@@ -208,9 +211,19 @@ class ViewController: UIViewController {
         asteroidsToBeRemoved.removeAll()
     }
     
+    private func evolveViper(){
+        if progressBar.progress >= 0.25 && progressBar.progress <= 0.75{
+            viperImageView.image = UIImage(named: "viper2")
+            progressBar.tintColor = UIColor.orange
+        } else if (progressBar.progress >= 0.75){
+            viperImageView.image = UIImage(named: "viper3")
+            progressBar.tintColor = UIColor.purple
+        }
+    }
+    
     private func decreaseProgressBar(dmg:Float){
         self.tempProgress = progressBar.progress
-        if tempProgress <= 0 {
+        if tempProgress >= 0 {
             decreasProgressBarAnimation()
             progressBar.progress = self.tempProgress - dmg
         } else {
@@ -238,6 +251,8 @@ class ViewController: UIViewController {
         speedViper = 3.0
         speedAsteroid = 2.0
         viper.moveToPoint = viperInitialPosition
+        viperImageView.image = UIImage(named: "viper2")
+        progressBar.tintColor = UIColor.blue
         self.gameRunning = true
     }
     

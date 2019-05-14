@@ -23,7 +23,7 @@
                             </imageView>
                             <progressView opaque="NO" contentMode="scaleAspectFit" verticalHuggingPriority="750" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="lhm-IB-yaL">
                                 <rect key="frame" x="46" y="637" width="283" height="10"/>
-                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="M0E-gg-2Da"/>
                                 </constraints>
