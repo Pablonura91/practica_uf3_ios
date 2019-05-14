@@ -28,6 +28,13 @@
                                     <constraint firstAttribute="height" constant="10" id="M0E-gg-2Da"/>
                                 </constraints>
                             </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulC-qE-HgY">
+                                <rect key="frame" x="279" y="87" width="80" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -44,6 +51,7 @@
                     <navigationItem key="navigationItem" title="SIMPLE MOVEMENT" id="ter-EE-MAW"/>
                     <connections>
                         <outlet property="progressBar" destination="lhm-IB-yaL" id="p3W-rV-MB4"/>
+                        <outlet property="scoreLabel" destination="ulC-qE-HgY" id="uTF-6A-rF1"/>
                         <segue destination="TH0-vd-5jg" kind="presentation" identifier="goToScoreView" id="hWH-lL-FZj"/>
                     </connections>
                 </viewController>

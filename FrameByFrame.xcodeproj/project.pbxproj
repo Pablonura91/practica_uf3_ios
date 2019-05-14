@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		005D7030228883B600B20E57 /* soundBackground.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 005D702F228883B500B20E57 /* soundBackground.mp3 */; };
 		00B3107222889D630064541A /* Damage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3107122889D630064541A /* Damage.swift */; };
+		00EFE4A3228B3D7A002E2B7D /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EFE4A2228B3D7A002E2B7D /* Counter.swift */; };
 		3E6C2AC62289B5420057A060 /* asteroidExplosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E6C2AC42289B5420057A060 /* asteroidExplosion.wav */; };
 		3E6C2AC72289B5420057A060 /* colisionWall.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E6C2AC52289B5420057A060 /* colisionWall.wav */; };
 		3EDD30B922853E86003D019B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDD30B822853E86003D019B /* AudioToolbox.framework */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		005D702F228883B500B20E57 /* soundBackground.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = soundBackground.mp3; path = FrameByFrame/Audio/soundBackground.mp3; sourceTree = SOURCE_ROOT; };
 		00B3107122889D630064541A /* Damage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Damage.swift; sourceTree = "<group>"; };
+		00EFE4A2228B3D7A002E2B7D /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		3E6C2AC42289B5420057A060 /* asteroidExplosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = asteroidExplosion.wav; sourceTree = "<group>"; };
 		3E6C2AC52289B5420057A060 /* colisionWall.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = colisionWall.wav; sourceTree = "<group>"; };
 		3EDD30B822853E86003D019B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -104,6 +106,7 @@
 				91FF5324227AD436004B8DD8 /* Asteroid.swift */,
 				3EDD30BA22853ED3003D019B /* SingletonMusicOnBackground.swift */,
 				00B3107122889D630064541A /* Damage.swift */,
+				00EFE4A2228B3D7A002E2B7D /* Counter.swift */,
 			);
 			path = FrameByFrame;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00EFE4A3228B3D7A002E2B7D /* Counter.swift in Sources */,
 				9140FB612278B37E007468B4 /* ViewController.swift in Sources */,
 				9140FB5F2278B37E007468B4 /* AppDelegate.swift in Sources */,
 				3EDD30BB22853ED3003D019B /* SingletonMusicOnBackground.swift in Sources */,

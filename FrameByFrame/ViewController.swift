@@ -3,6 +3,10 @@ import AudioToolbox
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var scoreLabel: UILabel!
+    
+    private let counter = Counter()
+    
     @IBOutlet weak var progressBar: UIProgressView!
     private var tempProgress: Float = 0.0
     //Music  Background
@@ -189,6 +193,8 @@ class ViewController: UIViewController {
     }
     
     private func eraseAsteroids(index:Int) {
+        counter.increment()
+        scoreLabel.text = "\(counter.value)"
         self.asteroidsViews[index].removeFromSuperview()
         self.asteroids.remove(at: index)
         self.asteroidsViews.remove(at: index)
@@ -256,6 +262,8 @@ class ViewController: UIViewController {
         viper.moveToPoint = viperInitialPosition
         viperImageView.image = UIImage(named: "viper2")
         progressBar.tintColor = UIColor.blue
+        counter.reset()
+        scoreLabel.text = "\(counter.value)"
         self.gameRunning = true
     }
     
