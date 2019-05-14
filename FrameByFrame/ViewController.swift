@@ -84,7 +84,7 @@ class ViewController: UIViewController {
             }
             
             //Increase progress bar every time asteroids hit the floor
-            if (asteroidsToBeRemoved.count > 0 && asteroidsToBeRemoved.count % 5 == 0){
+            if (asteroidsToBeRemoved.count > 0 && asteroidsToBeRemoved.count % 2 == 0){
                 increaseProgressBar()
             }
         
@@ -212,7 +212,10 @@ class ViewController: UIViewController {
     }
     
     private func evolveViper(){
-        if progressBar.progress >= 0.25 && progressBar.progress <= 0.75{
+        if progressBar.progress <= 0.25 {
+            viperImageView.image = UIImage(named: "viper")
+            progressBar.tintColor = UIColor.blue
+        } else if progressBar.progress >= 0.25 && progressBar.progress <= 0.75{
             viperImageView.image = UIImage(named: "viper2")
             progressBar.tintColor = UIColor.orange
         } else if (progressBar.progress >= 0.75){
@@ -223,7 +226,7 @@ class ViewController: UIViewController {
     
     private func decreaseProgressBar(dmg:Float){
         self.tempProgress = progressBar.progress
-        if tempProgress >= 0 {
+        if tempProgress >= 0.05 {
             decreasProgressBarAnimation()
             progressBar.progress = self.tempProgress - dmg
         } else {
