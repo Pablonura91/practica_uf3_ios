@@ -18,23 +18,23 @@ class ViewController: UIViewController {
     private var soundColisionBetweenWallAndViper :SystemSoundID = 0
     
     //Viper
-    var viperImageView = UIImageView()
-    var viper = Viper(speed: 3.0, center: CGPoint(x: 200, y: 600), size: CGSize(width: 100, height: 100))
+    private var viperImageView = UIImageView()
+    private var viper = Viper(speed: 3.0, center: CGPoint(x: 200, y: 600), size: CGSize(width: 100, height: 100))
     
-    var viperInitialPosition: CGPoint?
+    private var viperInitialPosition: CGPoint?
     
     //Asteroids
-    let ASTEROIDS_IMAGES_NAMES = ["Asteroid_A", "Asteroid_B", "Asteroid_C"]
-    var asteroids = [Asteroid]()
-    var asteroidsViews = [UIImageView]()
-    var asteroidsToBeRemoved = [Asteroid]()
+    private let ASTEROIDS_IMAGES_NAMES = ["Asteroid_A", "Asteroid_B", "Asteroid_C"]
+    private var asteroids = [Asteroid]()
+    private var asteroidsViews = [UIImageView]()
+    private var asteroidsToBeRemoved = [Asteroid]()
     
     
     //Game Logic
-    var gameRunning = false //to control game state
-    var stepNumber = 0 //Used in asteroids generation: every 5s an asteroid will be created
-    var speedAsteroid: CGFloat = 2.0
-    var speedViper: CGFloat = 3.0
+    private var gameRunning = false //to control game state
+    private var stepNumber = 0 //Used in asteroids generation: every 5s an asteroid will be created
+    private var speedAsteroid: CGFloat = 2.0
+    private var speedViper: CGFloat = 3.0
     
     
     
@@ -144,7 +144,7 @@ class ViewController: UIViewController {
     
     private func createAsteroid(){
         let size = randomWidth(minRange: 20, maxRange: 120)
-        let asteroid = Asteroid(speed: self.speedAsteroid, center: CGPoint(x: randomPositionX(range: Int(self.view.frame.width - (size.width / 2))), y: 140), size: size)
+        let asteroid = Asteroid(speed: self.speedAsteroid, center: CGPoint(x: randomPositionX(minRange: Int(0 + size.width / 2), range: Int(self.view.frame.width - (size.width / 2))), y: 140), size: size)
         self.asteroids.append(asteroid)
         
         let index = Int.random(in: 0 ..< ASTEROIDS_IMAGES_NAMES.count)
@@ -155,8 +155,8 @@ class ViewController: UIViewController {
         self.asteroidsViews.append(asteroidView)
     }
 
-    private func randomPositionX(range: Int) -> Int{
-        return randomNumber(minRange: 0, maxRange: range)
+    private func randomPositionX(minRange: Int, range: Int) -> Int{
+        return randomNumber(minRange: minRange, maxRange: range)
     }
     
     private func randomWidth(minRange: Int, maxRange: Int) -> CGSize {
@@ -175,6 +175,8 @@ class ViewController: UIViewController {
                 self.asteroidsToBeRemoved.append(asteroids[index])
                 eraseAsteroids(index: index)
                 
+                counter.increment()
+                scoreLabel.text = "\(counter.value)"
                 break
             }
         }
@@ -194,10 +196,6 @@ class ViewController: UIViewController {
     }
     
     private func eraseAsteroids(index:Int) {
-        if (!hasViperCollisionedWithAsteroid) {
-            counter.increment()
-            scoreLabel.text = "\(counter.value)"
-        }
         self.asteroidsViews[index].removeFromSuperview()
         self.asteroids.remove(at: index)
         self.asteroidsViews.remove(at: index)
