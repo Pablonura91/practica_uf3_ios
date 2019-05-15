@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0004DE48228CC1DD00273F3F /* HighScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0004DE47228CC1DD00273F3F /* HighScoreViewController.swift */; };
 		005D7030228883B600B20E57 /* soundBackground.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 005D702F228883B500B20E57 /* soundBackground.mp3 */; };
 		00B3107222889D630064541A /* Damage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3107122889D630064541A /* Damage.swift */; };
 		00EFE4A3228B3D7A002E2B7D /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EFE4A2228B3D7A002E2B7D /* Counter.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0004DE47228CC1DD00273F3F /* HighScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoreViewController.swift; sourceTree = "<group>"; };
 		005D702F228883B500B20E57 /* soundBackground.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = soundBackground.mp3; path = FrameByFrame/Audio/soundBackground.mp3; sourceTree = SOURCE_ROOT; };
 		00B3107122889D630064541A /* Damage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Damage.swift; sourceTree = "<group>"; };
 		00EFE4A2228B3D7A002E2B7D /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				3EDD30BA22853ED3003D019B /* SingletonMusicOnBackground.swift */,
 				00B3107122889D630064541A /* Damage.swift */,
 				00EFE4A2228B3D7A002E2B7D /* Counter.swift */,
+				0004DE47228CC1DD00273F3F /* HighScoreViewController.swift */,
 			);
 			path = FrameByFrame;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				91FF5323227AD115004B8DD8 /* Actor.swift in Sources */,
 				91FF5325227AD436004B8DD8 /* Asteroid.swift in Sources */,
 				00B3107222889D630064541A /* Damage.swift in Sources */,
+				0004DE48228CC1DD00273F3F /* HighScoreViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

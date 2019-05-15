@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5hH-jU-nak">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5hH-jU-nak">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -52,40 +52,54 @@
                     <connections>
                         <outlet property="progressBar" destination="lhm-IB-yaL" id="p3W-rV-MB4"/>
                         <outlet property="scoreLabel" destination="ulC-qE-HgY" id="uTF-6A-rF1"/>
-                        <segue destination="TH0-vd-5jg" kind="presentation" identifier="goToScoreView" id="hWH-lL-FZj"/>
+                        <segue destination="0Rp-ha-ptW" kind="presentation" identifier="goToScoreView" id="iQV-Pg-hG4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1076" y="132.68365817091455"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="EvM-SP-thC">
+        <!--Top Score Controller-->
+        <scene sceneID="Ztq-yb-xyC">
             <objects>
-                <tableViewController id="TH0-vd-5jg" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0qv-4e-1fc">
+                <viewController title="Top Score Controller" id="dEH-BP-Cx3" customClass="HighScoreViewController" customModule="FrameByFrame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TxF-pM-9NB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sez-ef-Uxb">
+                                <rect key="frame" x="104.5" y="314.5" width="166" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="AWI-n6-1sb"/>
+                                    <constraint firstAttribute="width" constant="166" id="my9-lB-ucQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="O6M-df-iBy">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O6M-df-iBy" id="tYL-M4-lzk">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="TH0-vd-5jg" id="ndp-y2-jKj"/>
-                            <outlet property="delegate" destination="TH0-vd-5jg" id="nhK-il-QaP"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W1P-4i-cy3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <constraints>
+                            <constraint firstItem="sez-ef-Uxb" firstAttribute="centerX" secondItem="TxF-pM-9NB" secondAttribute="centerX" id="BLf-KU-6Re"/>
+                            <constraint firstItem="sez-ef-Uxb" firstAttribute="centerY" secondItem="TxF-pM-9NB" secondAttribute="centerY" id="l9f-8G-qsF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pIm-Ps-1h7"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="High Score" id="5S3-Kd-nAi">
+                        <barButtonItem key="leftBarButtonItem" title="Play Again" id="5s7-Hc-P6N">
+                            <connections>
+                                <segue destination="FaS-tk-Xgj" kind="unwind" unwindAction="goBackWithSegue:" id="JhS-D5-6GP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="highScore" destination="sez-ef-Uxb" id="spM-6u-6E1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B3O-xv-4r4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="FaS-tk-Xgj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2052" y="133"/>
+            <point key="canvasLocation" x="3095.1999999999998" y="132.68365817091455"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HGr-WE-OzJ">
@@ -104,6 +118,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btC-dQ-e3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ww5-tn-Ict">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0Rp-ha-ptW" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Le7-DI-6sQ">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dEH-BP-Cx3" kind="relationship" relationship="rootViewController" id="PNu-9P-soJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Obg-hk-QSo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2156" y="132.68365817091455"/>
         </scene>
     </scenes>
     <resources>

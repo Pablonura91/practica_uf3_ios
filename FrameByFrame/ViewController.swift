@@ -274,6 +274,8 @@ class ViewController: UIViewController {
         for index in 0..<asteroids.count {
             eraseAsteroids(index: index)
         }
+        //comprobamos si hemos de guardar la puntuación.
+        checkIfScoreHasToBeSaved()
         self.gameRunning = false
         //se crea el alert dialog del game over
         let alert = UIAlertController(title: "Game Over", message: "Do you want to quit the game?.", preferredStyle: .alert)
@@ -288,6 +290,24 @@ class ViewController: UIViewController {
             self.performSegue (withIdentifier: "goToScoreView", sender: nil)
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func checkIfScoreHasToBeSaved() {
+        //si hay datos guardados en userdefaults comprobamos que el score sea mayor que el highscore, sino guardamos por primera vez.
+        let defaults = UserDefaults.standard
+        if let scoreToSave = defaults.value(forKey: "highscore") as? Int {
+            if (scoreToSave < counter.value) {
+                defaults.setValue(counter.value, forKeyPath: "highscore")
+            }
+        }
+        else {
+            defaults.setValue(counter.value, forKeyPath: "highscore")
+        }
+        
+    }
+    
+    @IBAction func goBack(segue : UIStoryboardSegue) {
+        resetValues()
     }
 }
 
