@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     private let VIPERS_IMAGES_NAMES = ["viper", "viper2", "viper3"]
     private let LEVELS_VIPER: [Float] = [0.25, 0.50, 0.75]
     private var viperImageView = UIImageView()
-    private var viper = Viper(speed: 3.0, center: CGPoint(x: 200, y: 600), size: CGSize(width: 100, height: 100))
+    private let viper = Viper(speed: 3.0, center: CGPoint(x: 200, y: 600), size: CGSize(width: 100, height: 100))
     private let INCREMENTSPEEDVIPER: CGFloat = 1.01
     private var viperInitialPosition: CGPoint?
     
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         //set up Viper
         viperImageView.frame.size = viper.size
         viperImageView.center = viper.center
-        viperImageView.image = UIImage(named: "viper")
+        viperImageView.image = UIImage(named: VIPERS_IMAGES_NAMES[0])
         self.view.addSubview(viperImageView)
         
         //allow user tap
@@ -231,7 +231,7 @@ class ViewController: UIViewController {
         } else if progressBar.progress >= LEVELS_VIPER[0] && progressBar.progress <= LEVELS_VIPER[1]{
             viperImageView.image = UIImage(named: VIPERS_IMAGES_NAMES[1])
             progressBar.tintColor = UIColor.orange
-        } else if (progressBar.progress >= LEVELS_VIPER[3]){
+        } else if (progressBar.progress >= LEVELS_VIPER[2]){
             viperImageView.image = UIImage(named: VIPERS_IMAGES_NAMES[2])
             progressBar.tintColor = UIColor.purple
         }
