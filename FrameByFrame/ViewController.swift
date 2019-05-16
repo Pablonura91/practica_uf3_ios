@@ -249,10 +249,8 @@ class ViewController: UIViewController {
     }
     
     private func decreasProgressBarAnimation(){
-//        AudioServicesPlaySystemSound(soundShake)
         let shakeAnimation = CABasicAnimation(keyPath: "position")
         shakeAnimation.duration = 0.07
-//        shakeAnimation.repeatCount = 50
         shakeAnimation.autoreverses = true
         shakeAnimation.fromValue = NSValue(cgPoint: CGPoint(x: self.progressBar.center.x - 10, y: self.progressBar.center.y))
         shakeAnimation.toValue = NSValue(cgPoint: CGPoint(x: self.progressBar.center.x + 10, y: self.progressBar.center.y))

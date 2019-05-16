@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                          policy: .longForm,
                                          options: [])
         } catch {
-            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+//            print("Setting category to AVAudioSessionCategoryPlayback failed.")
         }
         return true
     }
