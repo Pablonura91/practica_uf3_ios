@@ -9,7 +9,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var progressBar: UIProgressView!
     private var tempProgress: Float = 0.0
-    private var hasViperCollisionedWithAsteroid = false
+    
     //Music  Background
     let singletonMusicBackground = SingletonMusicOnBackground.sharedInstance
     
@@ -18,9 +18,11 @@ class ViewController: UIViewController {
     private var soundColisionBetweenWallAndViper :SystemSoundID = 0
     
     //Viper
+    private let VIPERS_IMAGES_NAMES = ["viper", "viper2", "viper3"]
+    private let LEVELS_VIPER: [Float] = [0.25, 0.50, 0.75]
     private var viperImageView = UIImageView()
     private var viper = Viper(speed: 3.0, center: CGPoint(x: 200, y: 600), size: CGSize(width: 100, height: 100))
-    
+    private let INCREMENTSPEEDVIPER: CGFloat = 1.01
     private var viperInitialPosition: CGPoint?
     
     //Asteroids
@@ -28,6 +30,7 @@ class ViewController: UIViewController {
     private var asteroids = [Asteroid]()
     private var asteroidsViews = [UIImageView]()
     private var asteroidsToBeRemoved = [Asteroid]()
+    private let INCREMENTSPEEDASTEROID: CGFloat = 1.05
     
     
     //Game Logic
@@ -35,8 +38,7 @@ class ViewController: UIViewController {
     private var stepNumber = 0 //Used in asteroids generation: every 5s an asteroid will be created
     private var speedAsteroid: CGFloat = 2.0
     private var speedViper: CGFloat = 3.0
-    
-    
+    private let INCREMENTPROGRESSBAR: Float = 0.05
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,15 +115,10 @@ class ViewController: UIViewController {
             if viper.checkScreenCollision(screenViewSize: self.view.frame.size){
                 AudioServicesPlaySystemSound(soundColisionBetweenWallAndViper)
                 self.decreaseProgressBar(dmg: Damage.Wall.rawValue)
-//                self.viperImageView.removeFromSuperview()
-//                self.gameRunning = false
-//                self.gameOver()
-                
             }
             
             //check asteroids collision between viper and screen
             /*INSERT CODE HERE*/
-            
             checkCollitionBetweenViperAndAsteroid()
             
             //remove from scene asteroids
@@ -143,14 +140,21 @@ class ViewController: UIViewController {
     }
     
     private func createAsteroid(){
+        //Generate random size
         let size = randomWidth(minRange: 20, maxRange: 120)
+        //Create asteroid
         let asteroid = Asteroid(speed: self.speedAsteroid, center: CGPoint(x: randomPositionX(minRange: Int(0 + size.width / 2), range: Int(self.view.frame.width - (size.width / 2))), y: 140), size: size)
         self.asteroids.append(asteroid)
         
-        let index = Int.random(in: 0 ..< ASTEROIDS_IMAGES_NAMES.count)
+        //Load random UIImage
+        let index = randomNumber(minRange: 0, maxRange: ASTEROIDS_IMAGES_NAMES.count - 1)
         let asteroidView = UIImageView(image: UIImage(named: ASTEROIDS_IMAGES_NAMES[index]))
+        
+        //Set size and center asteroid view
         asteroidView.frame.size = asteroid.size
         asteroidView.center = asteroid.center
+        
+        //Add asteroidView
         self.view.addSubview(asteroidView)
         self.asteroidsViews.append(asteroidView)
     }
@@ -168,13 +172,14 @@ class ViewController: UIViewController {
         return Int.random(in: minRange ... maxRange)
     }
     
+    //Check if asteroid has to be removed if it hits the floor
     private func checkAsteroidsSceneToRemove(){
         for index in 0..<asteroids.count{
             if asteroids[index].center.y >= self.view.frame.maxY{
-                
                 self.asteroidsToBeRemoved.append(asteroids[index])
                 eraseAsteroids(index: index)
                 
+                //Increment label Score
                 counter.increment()
                 scoreLabel.text = "\(counter.value)"
                 break
@@ -185,16 +190,17 @@ class ViewController: UIViewController {
     private func checkCollitionBetweenViperAndAsteroid() {
         for index in 0..<asteroids.count{
             if self.viper.overlapsWith(actor: asteroids[index]) {
-                hasViperCollisionedWithAsteroid = true
                 eraseAsteroids(index: index)
+                
                 AudioServicesPlaySystemSound(soundColisionBetweenAsteroidAndViper)
+                
                 decreaseProgressBar(dmg: Damage.Asteroid.rawValue)
-//                print("viper crashed")
                 break
             }
         }
     }
     
+    //Remove asteroid
     private func eraseAsteroids(index:Int) {
         self.asteroidsViews[index].removeFromSuperview()
         self.asteroids.remove(at: index)
@@ -202,31 +208,31 @@ class ViewController: UIViewController {
     }
     
     private func checkDificulty(){
-        //Speed Asteroids
-        self.speedAsteroid *= 1.05
+        //Speed Asteroids increment
+        self.speedAsteroid *= INCREMENTSPEEDASTEROID
         
-        //Speed Viper
-        self.speedViper *= 1.01
+        //Speed Viper INCREMENT
+        self.speedViper *= INCREMENTSPEEDVIPER
         self.viper.speed = self.speedViper
     }
     
     private func increaseProgressBar(){
         self.tempProgress = progressBar.progress
         
-        progressBar.progress = self.tempProgress + 0.05
+        progressBar.progress = self.tempProgress + INCREMENTPROGRESSBAR
         
         asteroidsToBeRemoved.removeAll()
     }
     
     private func evolveViper(){
-        if progressBar.progress <= 0.25 {
-            viperImageView.image = UIImage(named: "viper")
+        if progressBar.progress <= LEVELS_VIPER[0] {
+            viperImageView.image = UIImage(named: VIPERS_IMAGES_NAMES[0])
             progressBar.tintColor = UIColor.blue
-        } else if progressBar.progress >= 0.25 && progressBar.progress <= 0.75{
-            viperImageView.image = UIImage(named: "viper2")
+        } else if progressBar.progress >= LEVELS_VIPER[0] && progressBar.progress <= LEVELS_VIPER[1]{
+            viperImageView.image = UIImage(named: VIPERS_IMAGES_NAMES[1])
             progressBar.tintColor = UIColor.orange
-        } else if (progressBar.progress >= 0.75){
-            viperImageView.image = UIImage(named: "viper3")
+        } else if (progressBar.progress >= LEVELS_VIPER[3]){
+            viperImageView.image = UIImage(named: VIPERS_IMAGES_NAMES[2])
             progressBar.tintColor = UIColor.purple
         }
     }
@@ -261,7 +267,7 @@ class ViewController: UIViewController {
         speedViper = 3.0
         speedAsteroid = 2.0
         viper.moveToPoint = viperInitialPosition
-        viperImageView.image = UIImage(named: "viper2")
+        viperImageView.image = UIImage(named: VIPERS_IMAGES_NAMES[0])
         progressBar.tintColor = UIColor.blue
         counter.reset()
         scoreLabel.text = "\(counter.value)"
