@@ -143,7 +143,7 @@ class ViewController: UIViewController {
         //Generate random size
         let size = randomWidth(minRange: 20, maxRange: 120)
         //Create asteroid
-        let asteroid = Asteroid(speed: self.speedAsteroid, center: CGPoint(x: randomPositionX(minRange: Int(0 + size.width / 2), range: Int(self.view.frame.width - (size.width / 2))), y: 140), size: size)
+        let asteroid = Asteroid(speed: self.speedAsteroid, center: CGPoint(x: randomPositionX(minRange: Int(0 + size.width / 2), range: Int(self.view.frame.width - (size.width / 2))), y: Int(self.view.frame.minY + size.height)), size: size)
         self.asteroids.append(asteroid)
         
         //Load random UIImage
